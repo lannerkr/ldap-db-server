@@ -1,0 +1,17 @@
+{
+	"LdapServer": "0.0.0.0:10389",
+	"LdapBaseDn": "dc=physis,dc=kr",
+	"RadServer": "192.168.1.172:1812",
+	"RadSecret": "secret",
+	"RadNASidS": "store",
+	"RadNASidP": "partner",
+	"RadNASidE": "emp",
+	"RadClientPassword": "12345",
+	"LogPath": "/mnt/src/ldapProxy.log",
+	"RadHCuser": "health-check",
+	"RadHCrealm": "store",
+	"Secondary": true,
+	"MongoDBM": "mongoadmin:secret@192.168.0.150:27017",
+	"MongoDBS": "mongoadmin:secret@192.168.0.157:27017"
+
+}
