@@ -15,9 +15,9 @@ func (f *Frontend) radiuscheck() {
 			if rdcheck == "" {
 				Logger.Println("[HC-LOG]Radius check failed")
 				time.Sleep(time.Second * 5)
-				if rdcheck == "" {
-					Logger.Println("[HC-LOG]server is stopping")
-					f.server.Listener.Close()
+				if rdcheck == "" && !rdDown {
+					//Logger.Println("[HC-LOG]server is stopping")
+					//f.server.Listener.Close()
 					rdDown = true
 					Logger.Println("[HC-LOG]rdDown is now true")
 				}
@@ -29,11 +29,14 @@ func (f *Frontend) radiuscheck() {
 			Logger.Println("[HC-LOG]Radius check Recovered")
 			rdDown = false
 			Logger.Println("[HC-LOG]rdDown is now false")
-			go func() {
-				Logger.Println("[HC-LOG]server is starting")
-				err := f.server.ListenAndServe(f.serverAddr)
-				Logger.Println(err)
-			}()
+			//Logger.Println(svcStopped)
+			if svcStopped {
+				go func() {
+					Logger.Println("[HC-LOG]server is starting")
+					err := f.server.ListenAndServe(f.serverAddr)
+					Logger.Println(err)
+				}()
+			}
 		}
 
 		time.Sleep(time.Second * 15)

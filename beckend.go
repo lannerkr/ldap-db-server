@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net"
+	"time"
 
 	"layeh.com/radius"
 	"layeh.com/radius/rfc2865"
@@ -37,9 +38,14 @@ func beckend(user, realm string, hc bool) string {
 	rfc2865.UserName_SetString(packet, user)
 	rfc2865.UserPassword_SetString(packet, ClientPassword)
 
-	response, err := radius.Exchange(context.Background(), packet, RadSvr)
+	ctx, cancle := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancle()
+
+	response, err := radius.Exchange(ctx, packet, RadSvr)
 	if err != nil {
-		log.Fatal(err)
+		Logger.Println(err)
+		return ""
+
 	}
 	IPAttribute := response.Get(8)
 

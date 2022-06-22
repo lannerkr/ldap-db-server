@@ -22,6 +22,7 @@ func secondarycheck() {
 			}
 		}()
 		rdcheck = beckend(rdcuser, rdcrealm, true)
+		//Logger.Println(rdcheck)
 
 		if rdDown && rdcheck != "" {
 			Logger.Println("[HC-LOG-SEC]Radius check Recovered")
@@ -31,5 +32,7 @@ func secondarycheck() {
 		}
 
 		time.Sleep(time.Second * 15)
+
+		//Logger.Println("[HC-LOG-SEC]recheck process started")
 	}
 }

@@ -14,6 +14,9 @@ package main
 // backup server get framed-ip from DB add
 // version 1.3.1
 // update user history to seconday db (master server only)
+// version 1.4
+// beckend.go radius connection timeout(2sec) add
+// server.go service is stopping when rdDown is true && secondary is false
 
 import (
 	"fmt"
@@ -37,6 +40,7 @@ var (
 	rdcuser        string
 	rdcrealm       string
 	FramedIPstring string
+	svcStopped     bool = false
 )
 
 type Frontend struct {
@@ -93,6 +97,10 @@ func main() {
 	// time.Sleep(time.Second * 30)
 	// Logger.Println("server is stopping")
 	// frontend.server.Listener.Close()
+
+	// time.Sleep(time.Second * 30)
+	// Logger.Println("server is starting")
+	// frontend.Serve()
 
 	//if secondary {
 	switch secondary {

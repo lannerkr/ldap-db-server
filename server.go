@@ -82,6 +82,13 @@ func (s *Server) serve() error {
 		default:
 		}
 
+		if rdDown && !secondary {
+			Logger.Println("[HC-LOG]server is stopping")
+			s.Listener.Close()
+			svcStopped = true
+			return nil
+		}
+
 		rw, err := s.Listener.Accept()
 
 		if s.ReadTimeout != 0 {
