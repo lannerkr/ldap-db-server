@@ -17,6 +17,8 @@ package main
 // version 1.4
 // beckend.go radius connection timeout(2sec) add
 // server.go service is stopping when rdDown is true && secondary is false
+// version 1.4.1
+// code optimize
 
 import (
 	"fmt"

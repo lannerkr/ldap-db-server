@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 
 	ldap "github.com/lor00x/goldap/message"
@@ -38,7 +37,8 @@ func (msg *messagePacket) readMessage() (m ldap.LDAPMessage, err error) {
 func decodeMessage(bytes []byte) (ret ldap.LDAPMessage, err error) {
 	defer func() {
 		if e := recover(); e != nil {
-			err = errors.New(fmt.Sprintf("%s", e))
+			// err = errors.New(fmt.Sprintf("%s", e))
+			err = fmt.Errorf("%s", e)
 		}
 	}()
 	zero := 0
@@ -138,7 +138,7 @@ func readBytes(conn *bufio.Reader, bytes *[]byte, length int) (b byte, err error
 	newbytes := make([]byte, length)
 	n, err := conn.Read(newbytes)
 	if n != length {
-		fmt.Errorf("%d bytes read instead of %d", n, length)
+		err = fmt.Errorf("%d bytes read instead of %d", n, length)
 	} else if err != nil {
 		return
 	}

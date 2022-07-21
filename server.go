@@ -117,7 +117,7 @@ func (s *Server) serve() error {
 		go cli.serve()
 	}
 
-	return nil
+	//return nil
 }
 
 // Return a new session with the connection
